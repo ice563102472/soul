@@ -52,6 +52,11 @@ public enum PluginEnum {
     RATE_LIMITER(20, 0, "rate_limiter"),
 
     /**
+     * Context path mapping plugin enum.
+     */
+    CONTEXTPATH_MAPPING(25, 0, "context_path"),
+
+    /**
      * Rewrite plugin enum.
      */
     REWRITE(30, 0, "rewrite"),
@@ -60,8 +65,7 @@ public enum PluginEnum {
      * Redirect plugin enum.
      */
     REDIRECT(40, 0, "redirect"),
-
-
+    
     /**
      * Hystrix plugin enum.
      */
@@ -106,6 +110,11 @@ public enum PluginEnum {
      * Tars plugin enum.
      */
     TARS(60, 0, "tars"),
+
+    /**
+     * GPRC plugin enum.
+     */
+    GRPC(60, 0, "grpc"),
 
     /**
      * Monitor plugin enum.

@@ -34,6 +34,7 @@ import org.dromara.soul.admin.query.RuleConditionQuery;
 import org.dromara.soul.admin.query.RuleQuery;
 import org.dromara.soul.admin.query.SelectorQuery;
 import org.dromara.soul.admin.service.impl.SelectorServiceImpl;
+import org.dromara.soul.admin.service.impl.UpstreamCheckService;
 import org.dromara.soul.admin.vo.SelectorConditionVO;
 import org.dromara.soul.admin.vo.SelectorVO;
 import org.dromara.soul.common.dto.SelectorData;
@@ -96,10 +97,13 @@ public final class SelectorServiceTest {
     @Mock
     private ApplicationEventPublisher eventPublisher;
 
+    @Mock
+    private UpstreamCheckService upstreamCheckService;
+
     @Before
     public void setUp() {
         selectorService = new SelectorServiceImpl(selectorMapper, selectorConditionMapper, pluginMapper,
-                ruleMapper, ruleConditionMapper, eventPublisher);
+                ruleMapper, ruleConditionMapper, eventPublisher, upstreamCheckService);
     }
 
     @Test
@@ -277,7 +281,9 @@ public final class SelectorServiceTest {
         selectorConditionDTO1.setId("111");
         SelectorConditionDTO selectorConditionDTO2 = new SelectorConditionDTO();
         selectorConditionDTO2.setId("222");
-        selectorDTO.setSelectorConditions(Arrays.asList(selectorConditionDTO1, selectorConditionDTO2));
+        SelectorConditionDTO selectorConditionDTO3 = new SelectorConditionDTO();
+        selectorConditionDTO3.setId("");
+        selectorDTO.setSelectorConditions(Arrays.asList(selectorConditionDTO1, selectorConditionDTO2, selectorConditionDTO3));
         return selectorDTO;
     }
 

@@ -18,9 +18,9 @@
 
 package org.dromara.soul.client.tars.common.dto;
 
-import javafx.util.Pair;
 import lombok.Builder;
 import lombok.Data;
+import org.apache.commons.lang3.tuple.Pair;
 
 import java.util.List;
 
@@ -55,6 +55,14 @@ public class MetaDataDTO {
     
     private boolean enabled;
 
+    /**
+     * The type Rpc ext List.
+     */
+    @Data
+    @Builder
+    public static class RpcExtList {
+        private List<RpcExt> methodInfo;
+    }
 
     /**
      * The type Rpc ext.
@@ -62,9 +70,11 @@ public class MetaDataDTO {
     @Data
     @Builder
     public static class RpcExt {
-        private String returnType;
+        private String methodName;
 
         private List<Pair<String, String>> params;
+
+        private String returnType;
     }
 
 }

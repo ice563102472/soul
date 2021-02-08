@@ -40,6 +40,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.web.server.ServerWebExchange;
 import reactor.core.publisher.Mono;
 
+import java.lang.reflect.Method;
 import java.util.Objects;
 import java.util.Random;
 import java.util.concurrent.CompletableFuture;
@@ -55,6 +56,7 @@ public class TarsPlugin extends AbstractSoulPlugin {
     private static final Random RANDOM = new Random();
 
     @Override
+    @SuppressWarnings("unchecked")
     protected Mono<Void> doExecute(final ServerWebExchange exchange, final SoulPluginChain chain, final SelectorData selector, final RuleData rule) {
         String body = exchange.getAttribute(Constants.TARS_PARAMS);
         SoulContext soulContext = exchange.getAttribute(Constants.CONTEXT);
@@ -75,10 +77,10 @@ public class TarsPlugin extends AbstractSoulPlugin {
         TarsInvokePrxList tarsInvokePrxList = ApplicationConfigCache.getInstance().get(metaData.getPath());
         int index = RANDOM.nextInt(tarsInvokePrxList.getTarsInvokePrxList().size());
         Object prx = tarsInvokePrxList.getTarsInvokePrxList().get(index).getInvokePrx();
-        CompletableFuture<String> future = null;
+        Method method = tarsInvokePrxList.getMethod();
+        CompletableFuture future;
         try {
-            future = (CompletableFuture<String>) prx.getClass()
-                    .getDeclaredMethod(PrxInfoUtil.gerMethodName(metaData), tarsInvokePrxList.getParamTypes())
+            future = (CompletableFuture) method
                     .invoke(prx, PrxInfoUtil.getParamArray(tarsInvokePrxList.getParamTypes(), tarsInvokePrxList.getParamNames(), body));
         } catch (Exception e) {
             exchange.getResponse().setStatusCode(HttpStatus.INTERNAL_SERVER_ERROR);
@@ -92,7 +94,7 @@ public class TarsPlugin extends AbstractSoulPlugin {
             exchange.getAttributes().put(Constants.TARS_RPC_RESULT, ret);
             exchange.getAttributes().put(Constants.CLIENT_RESPONSE_RESULT_TYPE, ResultEnum.SUCCESS.getName());
             return ret;
-        })).onErrorMap(SoulException::new).then(chain.execute(exchange));
+        })).onErrorMap(m -> new SoulException("failed to invoke tars")).then(chain.execute(exchange));
     }
 
     @Override
