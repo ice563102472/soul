@@ -28,8 +28,8 @@ spring:
     suffix: .html
   datasource:
     url: jdbc:mysql://localhost:3306/soul?useUnicode=true&characterEncoding=utf-8
-    username: root
-    password:
+    username: yangzhuo
+    password: 231179yr
     driver-class-name: com.mysql.jdbc.Driver
 
 mybatis:
