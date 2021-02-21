@@ -27,7 +27,6 @@ import java.time.LocalDateTime;
  *
  * @author xiaoyu(Myth)
  */
-@Data
 public class SoulContext implements Serializable {
 
     /**
@@ -89,6 +88,112 @@ public class SoulContext implements Serializable {
      * startDateTime.
      */
     private LocalDateTime startDateTime;
-    
 
+    public String getModule() {
+        return module;
+    }
+
+    public SoulContext setModule(String module) {
+        this.module = module;
+        return this;
+    }
+
+    public String getMethod() {
+        return method;
+    }
+
+    public SoulContext setMethod(String method) {
+        this.method = method;
+        return this;
+    }
+
+    public String getRpcType() {
+        return rpcType;
+    }
+
+    public SoulContext setRpcType(String rpcType) {
+        this.rpcType = rpcType;
+        return this;
+    }
+
+    public String getHttpMethod() {
+        return httpMethod;
+    }
+
+    public SoulContext setHttpMethod(String httpMethod) {
+        this.httpMethod = httpMethod;
+        return this;
+    }
+
+    public String getSign() {
+        return sign;
+    }
+
+    public SoulContext setSign(String sign) {
+        this.sign = sign;
+        return this;
+    }
+
+    public String getTimestamp() {
+        return timestamp;
+    }
+
+    public SoulContext setTimestamp(String timestamp) {
+        this.timestamp = timestamp;
+        return this;
+    }
+
+    public String getAppKey() {
+        return appKey;
+    }
+
+    public SoulContext setAppKey(String appKey) {
+        this.appKey = appKey;
+        return this;
+    }
+
+    public String getPath() {
+        return path;
+    }
+
+    public SoulContext setPath(String path) {
+        this.path = path;
+        return this;
+    }
+
+    public String getContextPath() {
+        return contextPath;
+    }
+
+    public SoulContext setContextPath(String contextPath) {
+        this.contextPath = contextPath;
+        return this;
+    }
+
+    public String getRealUrl() {
+        return realUrl;
+    }
+
+    public SoulContext setRealUrl(String realUrl) {
+        this.realUrl = realUrl;
+        return this;
+    }
+
+    public String getDubboParams() {
+        return dubboParams;
+    }
+
+    public SoulContext setDubboParams(String dubboParams) {
+        this.dubboParams = dubboParams;
+        return this;
+    }
+
+    public LocalDateTime getStartDateTime() {
+        return startDateTime;
+    }
+
+    public SoulContext setStartDateTime(LocalDateTime startDateTime) {
+        this.startDateTime = startDateTime;
+        return this;
+    }
 }
